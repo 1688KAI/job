@@ -1,11 +1,11 @@
 package cn.itcast.task;
 
-import cn.itcast.dao.TuInfoDao;
-import cn.itcast.pojo.TuInfo;
+import cn.itcast.mapper.TuInfoMapper;
+import cn.itcast.model.gen.TuInfo;
+import cn.itcast.model.gen.TuInfoExample;
 import cn.itcast.util.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public class CopyImageToDisk {
 
 
     @Autowired
-    TuInfoDao tuInfoDao;
+    TuInfoMapper tuInfoMapper;
 
     @Autowired
     HttpClientUtil httpClientUtil;
@@ -25,7 +25,7 @@ public class CopyImageToDisk {
 
 //    @Scheduled(initialDelay = 1000*10, fixedDelay = 10000*5)
     public void CopyImageToDiskFun() {
-        List<TuInfo> all = tuInfoDao.findAll();
+        List<TuInfo> all = tuInfoMapper.selectByExample(new TuInfoExample());
         for (TuInfo tuInfo : all) {
             httpClientUtil.doGetImage(tuInfo.getUrl(), tuInfo.getTitle(),path);
         }
