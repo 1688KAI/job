@@ -1,11 +1,10 @@
 package cn.itcast.task;
 
-import cn.itcast.pojo.TuInfo;
+import cn.itcast.model.gen.TuInfo;
 import cn.itcast.task.service.SpringDataTuInfoPipeline;
 import cn.itcast.util.HttpClientUtil;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -65,7 +64,7 @@ public class LeSheProcessor implements PageProcessor {
 
         List<String> urlList = page.getHtml().css("#dgwt-jg-0").links().all();
         for (String url : urlList) {
-            tuInfos.add(new TuInfo(title,detailUrl,url));
+            tuInfos.add(new TuInfo(detailUrl,title,url));
         }
         //把结果 保存起来  使用springboot data 保存
         page.putField("tuInfos", tuInfos);

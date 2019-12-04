@@ -1,12 +1,11 @@
 package cn.itcast.task;
 
 
-import cn.itcast.pojo.JobInfo;
+import cn.itcast.model.gen.JobInfo;
 import cn.itcast.task.service.SpringDataJobPipeline;
 import cn.itcast.util.MathSalary;
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;

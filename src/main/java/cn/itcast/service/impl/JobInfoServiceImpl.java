@@ -1,13 +1,13 @@
 package cn.itcast.service.impl;
 
-import cn.itcast.dao.JobInfoDao;
-import cn.itcast.pojo.JobInfo;
+import cn.itcast.mapper.JobInfoMapper;
+import cn.itcast.model.gen.JobInfo;
+import cn.itcast.model.gen.JobInfoExample;
 import cn.itcast.service.JobInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -15,7 +15,7 @@ public class JobInfoServiceImpl implements JobInfoService {
 
 
     @Autowired
-    JobInfoDao jobInfoDao;
+    JobInfoMapper jobInfoMapper;
 
     @Override
     @Transactional
@@ -25,15 +25,13 @@ public class JobInfoServiceImpl implements JobInfoService {
         parame.setUrl(jobinfo.getUrl());
         parame.setTime(jobinfo.getTime());
 
-        final List<JobInfo> list = findAll(parame);
+        JobInfoExample jobInfoExample = new JobInfoExample();
+        jobInfoExample.createCriteria().andUrlEqualTo(jobinfo.getUrl());
+        List<JobInfo> list = jobInfoMapper.selectByExample(jobInfoExample);
         if (list.size()==0){
             if (jobinfo.getTime()!=null)
-            jobInfoDao.save(jobinfo);
+                jobInfoMapper.insertSelective(jobinfo);
         }
     }
-    @Override
-    public List<JobInfo> findAll(JobInfo jobInfo) {
-        Example example = Example.of(jobInfo);
-        return jobInfoDao.findAll(example);
-    }
+
 }

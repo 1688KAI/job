@@ -1,6 +1,6 @@
 package cn.itcast.task.service;
 
-import cn.itcast.pojo.JobInfo;
+import cn.itcast.model.gen.JobInfo;
 import cn.itcast.service.JobInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

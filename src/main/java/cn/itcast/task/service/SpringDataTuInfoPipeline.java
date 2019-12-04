@@ -1,9 +1,7 @@
 package cn.itcast.task.service;
 
-import cn.itcast.pojo.JobInfo;
-import cn.itcast.pojo.TuInfo;
+import cn.itcast.model.gen.TuInfo;
 import cn.itcast.service.TuInfoService;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
