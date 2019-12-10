@@ -5,6 +5,7 @@ import cn.itcast.task.service.SpringDataTuInfoPipeline;
 import cn.itcast.util.HttpClientUtil;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -84,7 +85,7 @@ public class LeSheProcessor implements PageProcessor {
                 .addUrl(url)
                 .setScheduler(new QueueScheduler().setDuplicateRemover(new BloomFilterDuplicateRemover(100000)))
                 .addPipeline(this.springDataTuInfoPipeline)
-                .thread(5)
+                .thread(10)
                 .run();
     }
 
